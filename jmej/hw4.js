@@ -134,3 +134,32 @@ return values;
 
 })();
 
+//3 secrets at all levels
+
+var person = (function(){
+  var passwords = {};
+  var names = {};
+  var id = 0;
+  function makeUser(name, pwd){
+    var user = {};
+    id = (id + 1);
+    user.id = id  
+    passwords[id] = pwd;
+    names[id] = name;
+
+    user.name = function(){
+      return names[(user.id)];
+    }
+    user.password = function(secret){
+      return secret == passwords[(user.id)];
+    }
+    return user;
+  }
+    return makeUser;
+})();
+
+var p1 = person("jesse","letmein");
+var p2 = person("otherguy","opensesame");
+
+
+
