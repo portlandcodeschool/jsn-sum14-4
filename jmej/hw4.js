@@ -139,6 +139,7 @@ return values;
 var person = (function(){
   var passwords = {};
   var names = {};
+  var log = [];
   var id = 0;
   function makeUser(name, pwd){
     var user = {};
@@ -153,13 +154,40 @@ var person = (function(){
     user.password = function(secret){
       return secret == passwords[(user.id)];
     }
-    return user;
-  }
-    return makeUser;
-})();
+    user.record = function(message){
+      if (message !== undefined){
+      log.push([user.name()]+": "+ message);
+    }
+    else {return undefined;}
 
-var p1 = person("jesse","letmein");
-var p2 = person("otherguy","opensesame");
+    }
+    user.getLog = function(username){
+      var o = "";  
+      if (username == undefined){
+      for (var i=0; i<log.length; i++){
+        o = o+log[i]+"\n";
+         }return o;}
+      else{for (var i=0; i<log.length; i++){
+        var line = log[i];
+        if (line.slice(0, (username.length)) == username){
+        o = o+line+"\n";
+      }
+      }
+          return o;
+     }}
+    return user;
+     }
+    return makeUser;
+     })();
+
+//usage and testing
+var p1 = person("me","letmein");
+var p2 = person("otheruser","opensesame");
+p1.record("test1")
+p1.record("is this thing on?")
+p2.record("first comment")
+p2.record("another comment")
+p1.getLog("me")
 
 
 
