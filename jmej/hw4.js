@@ -166,14 +166,14 @@ var person = (function(){
       if (username == undefined){
       for (var i=0; i<log.length; i++){
         o = o+log[i]+"\n";
-         }return o;}
+         }return o.slice(0, -1);}
       else{for (var i=0; i<log.length; i++){
         var line = log[i];
         if (line.slice(0, (username.length)) == username){
         o = o+line+"\n";
       }
       }
-          return o;
+          return o.slice(0, -1);
      }}
     return user;
      }
