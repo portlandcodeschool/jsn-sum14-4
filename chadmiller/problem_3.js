@@ -25,7 +25,7 @@ var system = (function() {
     if (!log.length) return print('No entries.');
 
     if (username) {
-      log.forEach(function() {
+      log.forEach(function(entry) {
         if (username === entry.username) {
           print(formatDate(entry.timestamp) + ' ' +
                 entry.username + ': ' + entry.message);
